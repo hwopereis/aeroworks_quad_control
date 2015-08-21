@@ -1,0 +1,14 @@
+<package>
+  <description brief="aeroquad">
+
+     aeroquad
+
+  </description>
+  <author>Wopereis</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/aeroquad</url>
+
+</package>
+
+

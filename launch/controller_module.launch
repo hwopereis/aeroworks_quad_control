@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+
+This launch file was intended for use through the interface.
+It starts the following nodes:
+- The actual controller (cpp executable)
+- A state estimation node (cpp executable) , deriving the velocity from the position information from the OptiTrack (not started by this launch file!)
+- An ardrone driver node, from ardrone_autonomy. Configuration of this node is as suggested in the original ardrone_autonomy launch files.
+- A fly_from_joystick node (cpp executable)
+
+  -->
+
+<launch>
+  <arg name="prefix" />
+  <group ns="$(arg prefix)">
+    <node name="control" pkg="aeroquad" type="controller" output="screen">
+      <param name="setpoint_x" value="0" />            <!-- Setpoint in world pose frame -->
+      <param name="setpoint_y" value="0" />            <!-- Setpoint in world pose frame -->
+      <param name="setpoint_z" value="1" />          <!-- Setpoint in world pose frame -->
+      <param name="setpoint_yaw" value="0" />          <!-- Setpoint in world pose frame -->
+      <param name="gain_p_z" value="2" />            <!-- Translational P gain for vertical speed -->
+      <param name="gain_d_z" value="1" />              <!-- Translational D gain for vertical speed -->
+      <param name="gain_p_translational" value="3" />    <!-- Translational P gain for lateral motion -->
+      <param name="gain_d_translational" value="3" />    <!-- Translational D gain for lateral motion -->
+      <param name="gain_p_rotational" value="1.2" />        <!-- Rotational P gain -->
+      <param name="gain_d_rotational" value="0" />        <!-- Rotational D gain -->
+      <param name="hovermode" value="false" />              <!-- Enable hovermode if error in all directions is smaller than the hover_treshold -->
+      <param name="hover_treshold" value="0.05" />          <!-- Hover treshold -->
+      <param name="pose_memory" value="30" />         <!-- Number of poses to remember for error calculation -->
+      <param name="publish_rate" value="1000" />        <!-- Update frequency in HZ -->
+      <param name="gain_velocity" value="-0.3" />     <!-- Standard gain for velocity damping -->
+      <param name="velocity_damping" value="false" /> <!-- Enable or disable absolute velocity damping -->
+      <param name="limit_velocity" value="10" />       <!-- Velocity limit for movement-->      
+      <param name="i_action" value="false" />         <!-- Enable or disable integral action on start. There is absolutely no reason to enable this. -->
+      <param name="gain_i" value="0.01" />            <!-- Integral action gain (equal for lateral actions) -->    
+    </node>
+
+    <node pkg="aeroquad" type="state_estimation" name="state_estimation" output="screen">
+      <param name="pose_memory" value="25" />         <!-- Number of poses to remember for velocity calculation -->
+    </node>
+  </group>    
+
+</launch>  
