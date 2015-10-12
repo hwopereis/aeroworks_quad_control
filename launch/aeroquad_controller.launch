@@ -30,10 +30,15 @@ This launch file starts the following nodes:
       </node>
   </group>
   <!-- Joystick node -->
-  <!--node pkg="joy" type="joy_node" name="joystick_node" output="screen"/-->
+  <node pkg="joy" type="joy_node" name="joystick_node" output="screen"/>
   
   <!-- Joystick converter -->
-  <node pkg="joystick_converter" type="joystick_to_cmd_vel.py" name="joystick_converter_node" output="screen"/>  
+  <node pkg="joystick_converter" type="joystick_to_cmd_vel.py" name="joystick_converter_node" output="screen">
+    <param name="joy_gain_x" value="10"/>
+    <param name="joy_gain_y" value="-10"/>
+    <param name="joy_gain_z" value="1"/>
+    <param name="joy_gain_yaw" value="1"/>
+  </node>  
   
   <!-- Controller node -->
   <node name="control" pkg="aeroquad" type="controller.py" output="screen">

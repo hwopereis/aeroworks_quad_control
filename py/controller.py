@@ -2,7 +2,6 @@
 
 """
 This Python executable is part of the ram ROS package. Its function is to handle the position control of a single quadcopter. The application is designed to work under Ubuntu Linux (and just that).
-For documentation, check the Github repository. http://github.com/ceesietopc/ram_ba_package
 """
 
 # System imports
